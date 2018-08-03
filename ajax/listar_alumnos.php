@@ -54,13 +54,13 @@ if($action == 'ajax'){
 						$finales=0;
 						while($row = mysqli_fetch_array($query)){	
 							$id_alumno=$row['id_alumno'];
-							$apellido=utf8_encode($row['Apellido']);
-							$nombre=utf8_encode($row['Nombre']);
+							$apellido=$row['Apellido'];
+							$nombre=$row['Nombre'];
 							$dni=$row['DNI'];
 							$telefono=$row['Telefono'];
 							$telefono2=$row['Telefono2'];
 							$localidad=$row['Localidad'];
-							$domicilio= utf8_encode($row['Domicilio']);
+							$domicilio= $row['Domicilio'];
 							$observaciones=$row['Observaciones'];
 							$categoria=$row['Categoria'];						
 							$finales++;
