@@ -81,8 +81,28 @@
 		<input type='number' size='4' name='precio' id='precio' maxlength='4' value='".$apagar."'required></input><br><br>";
 
 	}else{
-		$apagar = "El alumno no tiene asignado ninguna clase";
-		$apagar2 = "<label>'".$apagar."'</label><br><br>";
+
+		$sql = "SELECT porcentaje from descuentos where id = 1 and descripcion = 'Inscripcion'";
+		$resul = mysqli_query($con, $sql);
+		$registro = mysqli_fetch_array($resul);
+		$inscripcion = $registro['porcentaje'];
+		$tabla = "<br><table class='table table-striped table-hover'>
+				 <tr>
+				 <thead>
+				 <th>Detalle</th>
+				 <th>Importe</th>
+				 </thead>
+				 </tr>
+
+				 <tr>
+				 <td>Inscripcion</td>
+				 <td>$".$inscripcion."</td>
+				 </tr>
+				 </table>";
+		$apagar2 = "<br><label>Total a Pagar:</label>
+		<input type='number' size='4' name='precio' id='precio' maxlength='4' value='".$inscripcion."'required></input><br><br>";
+		
+		//$apagar2 = "<label>'".$Inscripcion."'</label><br><br>";
 	}
 	
 	$html= "<label>Cursa:</label>";

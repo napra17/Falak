@@ -9,8 +9,6 @@ if($action == 'ajax'){
 	$query = mysqli_real_escape_string($con,(strip_tags($_REQUEST['query'], ENT_QUOTES)));
 
 	$tables="pagos  left join
-	clases  on pagos.id_clase = clases.id_clase
-	inner join
 	alumnos  on pagos.id_alumno = alumnos.id_alumno";
 	$campos="*";
 	$sWhere="alumnos.Apellido LIKE '%".$query."%'";
@@ -30,11 +28,11 @@ if($action == 'ajax'){
 	else {echo mysqli_error($con);}
 	$total_pages = ceil($numrows/$per_page);
 	//main query to fetch the data
-	$query = mysqli_query($con,"SELECT pagos.id_pagos, clases.Nombre Clase, alumnos.Apellido, alumnos.Nombre, pagos.importe, pagos.mes, pagos.anio, pagos.fecha from
-	pagos  left join
-	clases  on pagos.id_clase = clases.id_clase
-	inner join
-	alumnos  on pagos.id_alumno = alumnos.id_alumno where $sWhere LIMIT $offset,$per_page");
+	$query = mysqli_query($con,"SELECT pagos.id_pagos, tipopago.nombre concepto, alumnos.Apellido, alumnos.Nombre, pagos.importe, pagos.mes, pagos.anio, pagos.fecha from
+	pagos left join 
+	alumnos on alumnos.id_alumno = pagos.id_alumno
+	inner join tipopago
+	on tipopago.id_tipo = pagos.id_pago where $sWhere LIMIT $offset,$per_page");
 	//loop through fetched data
 
 	
@@ -47,7 +45,7 @@ if($action == 'ajax'){
 				<thead>
 					<tr>
 						<th class='text-center'>ID</th>
-						
+						<th class='text-center'>Concepto</th>
 						<th class='text-center'>Alumno</th>
 						<th class='text-center'>Periodo</th>
 						<th class='text-center'>Importe</th>
@@ -62,14 +60,13 @@ if($action == 'ajax'){
 						$finales=0;
 						while($row = mysqli_fetch_array($query)){	
 							$id_pagos=$row['id_pagos'];
-							
+							$concepto=$row['concepto'];
 							$apellido=$row['Apellido'];
 							$nombre=$row['Nombre'];
 							$mes=$row['mes'];
 							$anio=$row['anio'];
 							$importe=$row['importe'];
 							$fecha = $row['fecha'];
-
 							$periodo = $mes . '/' . $anio;
 							$alumno = $apellido . ', ' . $nombre;
 						
@@ -77,7 +74,7 @@ if($action == 'ajax'){
 						?>	
 						<tr class="<?php echo $text_class;?>">
 							<td class='text-center'><?php echo $id_pagos;?></td>
-							
+							<td class='text-center'><?php echo $concepto;?></td>
 							<td class='text-center'><?php echo $alumno;?></td>
 							<td class='text-center'><?php echo $periodo;?></td>
 							<td class='text-center'><?php echo $importe;?></td>
@@ -88,7 +85,7 @@ if($action == 'ajax'){
 								<a  target="_blank" rel="noopener noreferrer" href='./recibo.php?id=<?php echo $id_pagos; ?>'>
 								<i class="material-icons" title="recibo">print</i></a>
 								
-								<a href="#deleteProductModal" class="delete" data-toggle="modal" data-id="<?php echo $id_clase;?>"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+								<a href="#deleteProductModal" class="delete" data-toggle="modal" data-id="<?php echo $id_pagos;?>"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
                     		</td>                          
 						</tr>
 						<?php }?>
