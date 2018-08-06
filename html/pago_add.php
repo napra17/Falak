@@ -6,7 +6,7 @@
  										
 					$("#alumno option:selected").each(function () {
 						id_alumno = $(this).val();
-						$.post("ajax/getclases2.php", { id_alumno: id_alumno }, function(data){
+						$.post("ajax/getclases.php", { id_alumno: id_alumno }, function(data){
 							$("#respuesta").html(data);
 							if ($('.modal-backdrop').is(':visible')) {
   							$('body').removeClass('modal-open'); 
