@@ -8,10 +8,10 @@
 						id_alumno = $(this).val();
 						$.post("ajax/getclases.php", { id_alumno: id_alumno }, function(data){
 							$("#respuesta").html(data);
-							if ($('.modal-backdrop').is(':visible')) {
-  							$('body').removeClass('modal-open'); 
-  							$('.modal-backdrop').remove(); 
-							};
+							//if ($('.modal-backdrop').is(':visible')) {
+  							//$('body').removeClass('modal-open'); 
+  							//$('.modal-backdrop').remove(); 
+							
 														
 						});            
 					});

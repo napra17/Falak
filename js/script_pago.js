@@ -45,7 +45,7 @@
 		  var parametros = $(this).serialize();
 			$.ajax({
 					type: "POST",
-					url: "ajax/editar_alumnos.php",
+					url: "ajax/editar_pagos.php",
 					data: parametros,
 					 beforeSend: function(objeto){
 						$("#resultados").html("Enviando...");
@@ -75,6 +75,11 @@
 					$('#addProductModal').modal('hide');
 				  }
 			});
+			if ($('#addProductModal').is(':visible')) {
+ 			 $('body').removeClass('modal-open'); 
+ 			 $('.modal-backdrop').remove(); 
+			};
+			location.reload();
 		  event.preventDefault();
 		});
 		
@@ -93,5 +98,11 @@
 					$('#deleteProductModal').modal('hide');
 				  }
 			});
+			if ($('#deleteProductModal').is(':visible')) {
+ 			 $('body').removeClass('modal-open'); 
+ 			 $('.modal-backdrop').remove(); 
+			};
+			location.reload();
+
 		  event.preventDefault();
 		});

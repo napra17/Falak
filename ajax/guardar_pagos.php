@@ -6,6 +6,7 @@
 	// escaping, additionally removing everything that could be (html/javascript-) code
     
 	$alumno = mysqli_real_escape_string($con,(strip_tags($_POST["alumno"],ENT_QUOTES)));
+	$tipo = $precio = intval($_POST["tipo"]);
 	$precio = intval($_POST["precio"]);
 	$periodo = intval($_POST["periodo"]);
 	$anio = intval($_POST["anio"]);
@@ -14,7 +15,7 @@
 	
 
 	// REGISTER data into database
-    $sql = "INSERT INTO pagos(id_alumno, importe, mes, anio, fecha) VALUES ('$alumno','$precio','$periodo','$anio','$fecha')";
+    $sql = "INSERT INTO pagos(id_alumno, id_pago,importe, mes, anio, fecha) VALUES ('$alumno','$tipo','$precio','$periodo','$anio','$fecha')";
     $query = mysqli_query($con,$sql);
     // if product has been added successfully
     if ($query) {

@@ -2,7 +2,7 @@
 include ("conexion.php");
 $id = $_GET["id"];
 
-$sql = "SELECT pagos.id_pagos, alumnos.Apellido, alumnos.Nombre, pagos.importe, pagos.anio, pagos.fecha ,
+$sql = "SELECT pagos.id_pagos, tipopago.nombre Tipo, alumnos.Apellido, alumnos.Nombre, pagos.importe, pagos.anio, pagos.fecha ,
 CASE pagos.mes
 When 1 THEN 'Enero'
 When 2 THEN 'Febrero'
@@ -18,13 +18,14 @@ When 11 THEN 'Noviembre'
 When 12 THEN 'Diciembre'
 end as Mes
 from pagos  left join
-clases  on pagos.id_clase = clases.id_clase
+tipopago  on pagos.id_pago = tipopago.id_tipo
 inner join
 alumnos  on pagos.id_alumno = alumnos.id_alumno where id_pagos = '".$id."'";
 
 $stm = mysqli_query($con, $sql);
 while($row = mysqli_fetch_array($stm)){ 
 $nombre=$row['Nombre'];
+$tipo = $row['Tipo'];
 $apellido=$row['Apellido'];
 $importe=$row['importe'];
 $mes=$row['Mes'];
@@ -46,7 +47,7 @@ $pdf->Image('graficos/falak.jpg',180,8,20);
 $pdf->Cell(0,20,'Instituto de Danzas FALAK',B,1,'C');
 $pdf->SetFont('Courier','B',12);
 $pdf->SetFillColor(200,220,255);
-$pdf->Cell(0,10,'Constancia de Pago de cuota',1,1,'C','true');
+$pdf->Cell(0,10,'Constancia de Pago de '.$tipo.'',1,1,'C','true');
 $pdf->SetFont('Courier','I',12);
 $pdf->Cell(0,10,$fecha,0,1,'R');
 $pdf->Cell(0,10,'Nombre y Apellido: '.$apellido.', '.$nombre,0,1);

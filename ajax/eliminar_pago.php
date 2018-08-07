@@ -4,15 +4,15 @@
 	} elseif (!empty($_POST['delete_id'])){
 	require_once ("../conexion.php");//Contiene funcion que conecta a la base de datos
 	// escaping, additionally removing everything that could be (html/javascript-) code
-    $id_clase=intval($_POST['delete_id']);
+    $id_pagos=intval($_POST['delete_id']);
 	
 
 	// DELETE FROM  database
-    $sql = "DELETE FROM  clases WHERE id_clase='$id_clase'";
+    $sql = "DELETE FROM  pagos WHERE id_pagos='$id_pagos'";
     $query = mysqli_query($con,$sql);
     // if product has been added successfully
     if ($query) {
-        $messages[] = "La clase ha sido eliminada con éxito.";
+        $messages[] = "El pago ha sido eliminada con éxito.";
     } else {
         $errors[] = "Lo sentimos, la eliminación falló. Por favor, regrese y vuelva a intentarlo.";
     }

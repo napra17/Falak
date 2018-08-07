@@ -88,6 +88,7 @@
 
 	$total = "<br><label>Total a Pagar:</label>
 		<input type='number' size='4' name='precio' id='precio' maxlength='4' value='".$apagar."'required></input><br><br>";
+	$tipo = "<input type='hidden' name='tipo' id='tipo' value=1>1</input>";
 
 }else{
 
@@ -107,12 +108,14 @@
 				 </table>";
 				 $total = "<br><label>Total a Pagar:</label>
 		<input type='number' size='4' name='precio' id='precio' maxlength='4' value='".$apagar."'required></input><br><br>";
+		$tipo = "<input type='hidden' id='tipo' name='tipo' value=0>0</input>";
 }
 
 echo $cursa;
 echo "<br>";
 echo $tabla;
 echo $total;
+echo $tipo; 
 
 		
 ?>

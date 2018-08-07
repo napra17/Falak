@@ -71,7 +71,7 @@ if($action == 'ajax'){
 								data-porc="<?php echo $porcentaje?>" 
 								data-id="<?php echo $id?>">
 								<i class="material-icons" data-toggle="tooltip" title="Editar" >&#xE254;</i></a>
-								<a href="#deleteProductModal" class="delete" data-toggle="modal" data-id="<?php echo $id;?>"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+								
                     		</td>                          
 						</tr>
 						<?php }?>
