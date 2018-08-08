@@ -7,7 +7,7 @@ include ("menu.html");
 
 <head>
   <meta charset="UTF-8">
-  <title>Asignacion</title>
+  <title>Reportes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
@@ -19,10 +19,12 @@ include ("menu.html");
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/custom.css">
 
+
   
 </head>
 
 <body>
+	<script type="text/javascript" src="js/jquery.min.js" ></script>
 <link rel="stylesheet" href="css/repor.css">
 <div id="wrapper">
 	<h1>Reportes</h1>
@@ -40,7 +42,7 @@ include ("menu.html");
 			<span>Google-plus</span>
 		</li>
 		<li class="tw">
-			<img class="icon" src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/social-twitter-24.png" alt="">
+			<img id="icon" class="icon" src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/social-twitter-24.png" alt="">
 			<span>Twitter</span>
 		</li>
 		<li class="cl">
@@ -49,7 +51,16 @@ include ("menu.html");
 		</li>
 	</ul>
 </div>
+<div id="tabla">
+	
+</div>
 </body>
-
+<script>
+	$(document).ready(function() {
+	$(".hm").click(function(event) {
+	$("#tabla").load('reportes/pagospormes.php');
+	});
+});;
+</script>
 
 </html>

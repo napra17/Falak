@@ -1,3 +1,10 @@
+#tabla{
+	margin-left: 330px;
+	height: auto;
+	width: 720px;
+	background:#CCCAA1;
+	font-family: 'Source Sans Pro', sans-serif;
+}
 
 #wrapper{
 	width: 728px;
