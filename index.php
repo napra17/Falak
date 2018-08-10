@@ -19,11 +19,10 @@
 	</head>
 
 	<body>
-		    <div id="general">
-	
+	<div id="general">
 	<div id="titulo">Pagos adeudados del Mes</div>
 	<div id="panel1"></div>
-	<div id="titulo">Pagos adeudados del Mes</div>
+	<div id="titulo">Margenes</div>
 	<div id="panel2"></div>
 
 </div>
@@ -36,11 +35,10 @@
 		});
 	});
 	</script>
-
-		<script>
+	<script>
 	$(document).ready(function(e){
-		$('#panel2').load('graficos/adeudan.php', function(data2){
-			$(this).html(data2);
+		$('#panel2').load('graficos/margenes.php', function(data1){
+			$(this).html(data1);
 
 		});
 	});

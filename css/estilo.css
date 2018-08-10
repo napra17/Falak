@@ -4,12 +4,11 @@
     	-webkit-column-count: 2;
     	-moz-column-count: 2;
     	-o-column-count: 2;
-		margin: auto;
+		
 		margin-top: 20px;
 		margin-left: 250px;
-		width: 80%;
-
-		
+		float: left;
+		height: 900px;
 		
 }
 
@@ -19,8 +18,7 @@
 		color: #fff;
 		padding: 16px 30px;
 		margin: auto;
-		width: auto;
-		
+		width: 500px;
 		/*margin: -20px -25px 10px;*/
 		border-radius: 3px 3px 0 0;
 		
@@ -31,7 +29,7 @@
 		margin: auto;
 		width: auto;
         box-shadow: 0 1px 1px rgba(0,0,0,.05);
-        
+        height: 260px;
         
 }
 #panel2{
@@ -39,15 +37,14 @@
    		border-radius: 3px;
 		margin: auto;
 		width: auto;
-		height: 280px;
+		height: 260px;
         box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
 #panel3{
 		background: #fff;
-        padding: 20px 25px;
-        
-		border-radius: 3px;
-		width: 30%;
-		height: 30%;
+   		border-radius: 3px;
+		margin: auto;
+		width: auto;
+		height: 260px;
         box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }

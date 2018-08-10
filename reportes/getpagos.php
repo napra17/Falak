@@ -1,12 +1,5 @@
 <?php 
 
-header("Pragma: public");
-header("Expires: 0");
-$filename = "reporte_mensual.xls";
-header("Content-type: application/x-msdownload");
-header("Content-Disposition: attachment; filename=$filename");
-header("Pragma: no-cache");
-header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 
 $mes = $_POST["periodo"];
 
@@ -21,6 +14,13 @@ $result = mysqli_query ($con, $sql);
 $count = mysqli_num_rows($result);
 
 if ($count > 0){
+header("Pragma: public");
+header("Expires: 0");
+$filename = "reporte_mensual.xls";
+header("Content-type: application/x-msdownload");
+header("Content-Disposition: attachment; filename=$filename");
+header("Pragma: no-cache");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 ?>
 <meta charset="UTF-8">
 <table>
@@ -63,5 +63,6 @@ if ($count > 0){
 </table>
 
 <?php } else{
-	echo "alert('No hay pagos para el mes seleccionado');";
+	echo '<script language="javascript">alert("No hay pagos para el mes seleccionado");</script>';
+	echo '<script language="javascript">window.history.back(-1);</script>';  
 }?>
