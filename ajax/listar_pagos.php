@@ -66,7 +66,8 @@ if($action == 'ajax'){
 							$mes=$row['mes'];
 							$anio=$row['anio'];
 							$importe=$row['importe'];
-							$fecha = $row['fecha'];
+							$date = $row['fecha'];
+							$fecha = date("d-m-Y",strtotime($date));
 							$periodo = $mes . '/' . $anio;
 							$alumno = $apellido . ', ' . $nombre;
 						

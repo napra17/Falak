@@ -8,7 +8,7 @@ $newDate = date(Ymd,strtotime($fecha));
 
 include ("../conexion.php");
 
-$sql = "INSERT into horas (fecha, horas, id_profesor) values ($newDate, $horas, $id_profesor)";
+$sql = "INSERT into horas (fecha, horas, id_profesor, estado) values ($newDate, $horas, $id_profesor, 'Pendiente')";
 $query = mysqli_query($con,$sql);
 
 if (!$query) {
