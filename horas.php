@@ -108,6 +108,7 @@ while ($row=mysqli_fetch_array($stm)) {
             <th class='text-center'>Año</th>
             <th class='text-center'>Total de horas</th>
             <th class='text-center'>Total</th>          
+            <th class='text-center'>Precio</th>
           </tr>
         </thead>
         <tbody style="color: #C81313">
@@ -127,10 +128,22 @@ where m.estado = 'Pendiente' and m.id_profesor = $id_profesor group by m.idmes";
               <td class='text-center'><?php echo $date;?></td>
               <td class='text-center'><?php echo $horas;?></td>
               <td class='text-center'>$<?php echo $total_hora;?></td>
+              <td>
+              <a href='ajax/pago_horas.php?mes=<?php echo $mes;?>&id=<?php echo $id_profesor;?>' onclick="return confirm('Confirma el pago de horas?')">
+                <i class="material-icons" title="Alumnos">local_atm</i></a></td>
              </tr> 
             <?php }?>
              
           </tbody>
       </div>
+      <script language="JavaScript" type="text/JavaScript">
+      function elegir() {
+      if (confirm('se borran los datos')) {
+      alert('borrar');
+      } else {
+      alert('no se borra nada');
+      }
+    }
+</script>
 </html>
 
