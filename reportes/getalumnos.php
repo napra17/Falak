@@ -19,7 +19,7 @@ $count = mysqli_num_rows($result);
 if ($count > 0){
 header("Pragma: public");
 header("Expires: 0");
-$filename = "reporte_mensual.xls";
+$filename = "reporte_alumnos.xls";
 header("Content-type: application/x-msdownload");
 header("Content-Disposition: attachment; filename=$filename");
 header("Pragma: no-cache");

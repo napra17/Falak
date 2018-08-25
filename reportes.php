@@ -69,5 +69,12 @@ include ("menu.html");
 	});
 });;
 </script>
+<script>
+	$(document).ready(function() {
+	$(".gp").click(function(event) {
+	$("#tabla").load('reportes/profesores.php');
+	});
+});;
+</script>
 
 </html>
