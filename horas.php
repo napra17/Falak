@@ -113,9 +113,9 @@ while ($row=mysqli_fetch_array($stm)) {
         </thead>
         <tbody style="color: #C81313">
         <?php
-              $query = "SELECT meses.Mes, m.idyear Año,m.horas 
+              $query = "SELECT meses.Mes, m.idyear Año,sum(m.horas) horas
 from meses inner join (select horas, id_profesor,estado,MONTH(horas.fecha) idmes, YEAR(horas.fecha) as idyear from horas) as m on meses.id_mes = m.idmes
-where m.estado = 'Pendiente' and m.id_profesor = $id_profesor group by m.idmes"; 
+where m.estado = 'Pendiente' and m.id_profesor = $id_profesor group by m.idmes;"; 
               $result = mysqli_query($con, $query);
               while($row = mysqli_fetch_array($result)){ 
               $mes=$row['Mes'];
@@ -129,7 +129,7 @@ where m.estado = 'Pendiente' and m.id_profesor = $id_profesor group by m.idmes";
               <td class='text-center'><?php echo $horas;?></td>
               <td class='text-center'>$<?php echo $total_hora;?></td>
               <td>
-              <a href='ajax/pago_horas.php?mes=<?php echo $mes;?>&id=<?php echo $id_profesor;?>' onclick="return confirm('Confirma el pago de horas?')">
+              <a href='ajax/pago_horas.php?mes=<?php echo $mes;?>&id=<?php echo $id_profesor;?>&anio=<?php echo $date; ?>' target="_blank" onclick="return confirm('Confirma el pago de horas?')">
                 <i class="material-icons" title="Alumnos">local_atm</i></a></td>
              </tr> 
             <?php }?>
