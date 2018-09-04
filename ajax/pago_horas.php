@@ -87,7 +87,7 @@ while ($row=mysqli_fetch_array($result)){
 	$estado = $row['estado'];
 	$tot+=($row['horas']);
 
-	$modifica = "UPDATE horas set estado ='Pagado' where id_horas = $id";
+	$modifica = "UPDATE horas set estado ='Pagado', f_pago=$fecha where id_horas = $id";
 	$update = mysqli_query($con,$modifica);
 	
 $pdf->Cell(50,6,$id,1,0,C);

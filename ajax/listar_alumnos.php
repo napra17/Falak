@@ -73,8 +73,13 @@ if($action == 'ajax'){
 							<td class='text-center' ><?php echo $telefono;?></td>
 							<td class='text-center'><?php echo $domicilio;?></td>
 							
-							<td><a href='./asignaciones.php?id=<?php echo $id_alumno ?>'>
-								<i class="material-icons" title="Alumnos">group</i></a></td>
+							<td>
+								<a href='./asignaciones.php?id=<?php echo $id_alumno ?>'>
+								<i class="material-icons" title="Clases">group</i></a>
+								<a href='./deudaxalumno.php?id=<?php echo $id_alumno ?>'>
+								<i class="material-icons" title="Deuda">monetization_on</i></a>
+
+							</td>
 							<td>
 								<a href="#"  data-target="#editProductModal" class="edit" data-toggle="modal" data-ape='<?php echo $apellido;?>' 
 								data-name="<?php echo $nombre?>" 

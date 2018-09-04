@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html>
 
-<body>
-
 		<script src="Chart/Chart.bundle.js"></script>
 		<script src="Chart/samples/utils.js"></script>
+
+<body>
+
 
 		<div id="canvas-holder">
 			<canvas id="chart-area"></canvas>

@@ -43,10 +43,59 @@
 
 	$row_cnt = mysqli_num_rows($resultadoM);
 
+	
 	if ($row_cnt > 1) {
 		$sumacuota = $cuota * $row_cnt;
 		$totalcuota = $sumacuota - ($sumacuota * $descuento / 100);
 		$totaldescuento = $sumacuota * $descuento / 100;
+
+	// Verifico la fecha de pago y aplico recargo en caso de ser necesario
+
+		if ($hoy > 15){
+		$totalcuota = $sumacuota + ($sumacuota * $recargo / 100);
+		$totalrecargo = $sumacuota * $recargo / 100;
+		}
+	
+		$apagar = $sumacuota + $totalrecargo - $totaldescuento;
+
+		$tabla = "<br><table class='table table-striped table-hover'>
+				 <tr>
+				 <thead>
+				 <th>Detalle</th>
+				 <th>Importe</th>
+				 </thead>
+				 </tr>
+				 <tr>
+					 <td>Cuotas</td>
+				 <td style='color:blue'>$".$sumacuota."</td>
+				 </tr>
+				 <tr>
+				 <td>Descuentos</td>
+				 <td style='color:red'>-$".$totaldescuento."</td>
+				 </tr>
+				 <tr>
+				 <td>Recargos</td>
+				 <td>$".$totalrecargo."</td>
+				 </tr>
+				 </table>";
+
+	$cursa= "<label>Cursa:</label>";
+	
+	while($rowM = $resultadoM->fetch_assoc())
+	{
+		$cursa.= "<label><b>".$rowM['Nombre']."</label></b> ,";
+
+	}
+
+	$total = "<br><label>Total a Pagar:</label>
+		<input type='number' size='4' name='precio' id='precio' maxlength='4' value='".$apagar."'required></input><br><br>";
+	$tipo = "<input type='hidden' name='tipo' id='tipo' value=1>1</input>";
+
+}else if ($row_cnt == 1){
+
+		$sumacuota = $cuota * $row_cnt;
+		$totalcuota = $sumacuota;
+		$totaldescuento = 0;
 
 	// Verifico la fecha de pago y aplico recargo en caso de ser necesario
 

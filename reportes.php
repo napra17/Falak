@@ -31,7 +31,7 @@ include ("menu.html");
 	<ul class="nav">
 		<li class="hm">
 			<img class="icon" src="icons/pagos.png" alt="">
-			<span>Pagos</span>
+			<span>Cobros</span>
 		</li>
 		<li class="fb">
 			<img class="icon" src="icons/alumnos.png" alt="">
@@ -47,7 +47,7 @@ include ("menu.html");
 		</li>
 		<li class="cl">
 			<img class="icon" src="icons/finanzas.png" alt="">
-			<span>Finanzas</span>
+			<span>Pagos</span>
 		</li>
 	</ul>
 </div>
@@ -73,6 +73,20 @@ include ("menu.html");
 	$(document).ready(function() {
 	$(".gp").click(function(event) {
 	$("#tabla").load('reportes/profesores.php');
+	});
+});;
+</script>
+<script>
+	$(document).ready(function() {
+	$(".tw").click(function(event) {
+	$("#tabla").load('reportes/deudores.php');
+	});
+});;
+</script>
+<script>
+	$(document).ready(function() {
+	$(".cl").click(function(event) {
+	$("#tabla").load('reportes/pagohora.php');
 	});
 });;
 </script>
