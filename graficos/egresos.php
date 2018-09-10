@@ -7,12 +7,12 @@
 		<script src="Chart/Chart.min.js"></script>
 		<script src="Chart/samples/utils.js"></script>
 <body>
-	<canvas id="speedChart"></canvas>
+	<canvas id="speedCharter"></canvas>
 </body>
 </html>
 
 <script>
-	var speedCanvas = document.getElementById("speedChart");
+	var speedCanvas = document.getElementById("speedCharter");
 
 Chart.defaults.global.defaultFontFamily = "Lato";
 Chart.defaults.global.defaultFontSize = 16;
@@ -22,8 +22,10 @@ var speedData = {
 
   	<?php 
   	include ("../conexion.php");
-  	$query = ("SELECT meses.Mes, sum(pagos.importe) total from pagos right join meses on pagos.mes = meses.id_mes where pagos.anio =YEAR(CURDATE())
-			group by mes order by meses.id_mes");
+  	$query = ("SELECT meses.Mes, sum(horas)
+from horas inner join meses on meses.id_mes=MONTH(fecha)
+where estado ='Pagado'
+group by MONTH(fecha) order by meses.id_mes");
   	$result = mysqli_query($con,$query);
   	while ($row=mysqli_fetch_array($result)){
 
@@ -32,16 +34,18 @@ var speedData = {
 
   ],
   datasets: [{
-    label: "Total Ingresos ($)",
+    label: "Total Egresos ($)",
     data: [
     <?php 
 
-  	$sql = ("SELECT meses.Mes, sum(pagos.importe) total from pagos right join meses on pagos.mes = meses.id_mes
-			where pagos.anio =YEAR(CURDATE()) group by mes order by meses.id_mes");
+  	$sql = ("SELECT meses.Mes, sum(horas) * 150 horas  
+from horas inner join meses on meses.id_mes=MONTH(fecha)
+where estado ='Pagado'
+group by MONTH(fecha) order by meses.id_mes");
   	$result = mysqli_query($con,$sql);
     while ($row=mysqli_fetch_array($result)){
 
-  	 ?>'<?php echo $row['total'] ?>',
+  	 ?>'<?php echo $row['horas'] ?>',
   	<?php } ?>
 
     ],
@@ -55,6 +59,7 @@ var chartOptions = {
     labels: {
       boxWidth: 80,
       fontColor: 'black'
+      
     }
   }
 };

@@ -35,6 +35,8 @@
 <div id = "sidebar">
 	<div id="titulo">Ultimos 3 meses</div>
 	<div id="panel3"></div>
+	<div id="titulo">Egresos</div>
+	<div id="panel4"></div>
 
 </div>
 
@@ -57,6 +59,15 @@
 		<script>
 	$(document).ready(function(e){
 		$('#panel3').load('graficos/historial.php', function(data1){
+			$(this).html(data1);
+
+		});
+	});
+	</script>
+	
+		<script>
+	$(document).ready(function(e){
+		$('#panel4').load('graficos/egresos.php', function(data1){
 			$(this).html(data1);
 
 		});

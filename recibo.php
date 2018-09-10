@@ -30,7 +30,8 @@ $apellido=$row['Apellido'];
 $importe=$row['importe'];
 $mes=$row['Mes'];
 $anio=$row['anio'];
-$fecha1=$row['fecha'];
+$date=$row['fecha'];
+$fecha1= date("d-m-Y",strtotime($date));
 
 }
 

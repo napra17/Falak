@@ -40,8 +40,8 @@ $query = "SELECT Apellido, Nombre from profesores where id_profesor = $id_profes
 $stm = mysqli_query($con, $query);
 
 while ($prof = mysqli_fetch_array($stm)){
-	$apellido = $prof['Apellido'];
-	$nombre = $prof['Nombre'];
+	$apellido = utf8_encode($prof['Apellido']);
+	$nombre = utf8_decode($prof['Nombre']);
 }
 
 $sql ="SELECT horas.id_horas, horas.fecha, horas.horas, profesores.Apellido, profesores.Nombre,horas.estado 
