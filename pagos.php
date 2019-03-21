@@ -1,3 +1,8 @@
+<?php   session_start();
+  if(!isset($_SESSION["session_username"])) {
+  header("location:index.php");
+  } else { ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,3 +64,4 @@
   <script src="js/script_pago.js"></script>
 </body>
 </html>
+<?php } ?>

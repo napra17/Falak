@@ -1,82 +1,79 @@
-	<?php 
-	include ("menu.html");
-	date_default_timezone_set('America/Argentina/Buenos_Aires');
-	$mes =date(F);
-	$meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
- 	$meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-    $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
-	 ?>
-
-	<!doctype html>
-	<html>
-
-	<head>
-		<title>Panel de Control</title>
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-		<link rel="stylesheet" href="bootstrap/css/material-icons.css">
-		<link rel="stylesheet" href="bootstrap/css/fontawesome.min.css">
-		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-		<script type="text/javascript" src="js/jquery.min.js" ></script>
-		<link rel="stylesheet" href="css/estilo.css">
-		<link rel="stylesheet" href="css/custom.css">
-
-	</head>
-
-	<body>
-	<div id="general">
-	<div id="titulo">Pagos adeudados de <?php echo $nombreMes	 ?></div>
-	<div id="panel1"></div>
-	<div id="titulo">Ingresos</div>
-	<div id="panel2"></div>
-
-	
+<?php 
+session_start();
+?>
+ 
+<?php require_once("includes/conexion.php"); ?>
+<?php include("includes/header.php"); ?>
+ 
+<?php
+ 
+if(isset($_SESSION["session_username"])){
+// echo "Session is set"; // for testing purposes
+header("Location: intropage.php");
+}
+ 
+if(isset($_POST["login"])){
+ 
+if(!empty($_POST['username']) && !empty($_POST['password'])) {
+ $username=$_POST['username'];
+ $password=$_POST['password'];
+ 
+$query =mysql_query("SELECT * FROM usuarios WHERE usuario='".$username."' AND password='".$password."'");
+ 
+$numrows=mysql_num_rows($query);
+ if($numrows!=0)
+ 
+{
+ while($row=mysql_fetch_assoc($query))
+ {
+ $dbusername=$row['usuario'];
+ $dbpassword=$row['password'];
+ $dbperfil=$row['perfil'];
+ }
+ 
+if($username == $dbusername && $password == $dbpassword)
+ 
+{
+ 
+ $_SESSION['session_username']=$username;
+ $_SESSION['session_perfil']=$dbperfil;
+ 
+/* Redirect browser */
+ header("Location: intropage.php");
+ }
+ } else {
+ 
+$message = "Nombre de usuario ó contraseña invalida!";
+ }
+ 
+} else {
+ $message = "Todos los campos son requeridos!";
+}
+}
+?>
+ 
+ <div class="container mlogin">
+ <div id="login">
+ <h1>Inicio de sesion</h1>
+<form name="loginform" id="loginform" action="" method="POST">
+ <p>
+ <label for="user_login">Nombre De Usuario<br />
+ <input type="text" name="username" id="username" class="input" value="" size="20" /></label>
+ </p>
+ <p>
+ <label for="user_pass">Contraseña<br />
+ <input type="password" name="password" id="password" class="input" value="" size="20" /></label>
+ </p>
+ <p class="submit">
+ <input type="submit" name="login" class="button" value="Entrar" />
+ </p>
+ 
+</form>
+ 
 </div>
-
-<div id = "sidebar">
-	<div id="titulo">Ultimos 3 meses</div>
-	<div id="panel3"></div>
-	<div id="titulo">Egresos</div>
-	<div id="panel4"></div>
-
+ 
 </div>
-
-	<script>
-	$(document).ready(function(e){
-		$('#panel1').load('graficos/pie.php', function(data){
-			$(this).html(data);
-
-		});
-	});
-	</script>
-	<script>
-	$(document).ready(function(e){
-		$('#panel2').load('graficos/margenes.php', function(data1){
-			$(this).html(data1);
-
-		});
-	});
-	</script>
-		<script>
-	$(document).ready(function(e){
-		$('#panel3').load('graficos/historial.php', function(data1){
-			$(this).html(data1);
-
-		});
-	});
-	</script>
-	
-		<script>
-	$(document).ready(function(e){
-		$('#panel4').load('graficos/egresos.php', function(data1){
-			$(this).html(data1);
-
-		});
-	});
-	</script>
-
-
-	</body>
-	
-
-
-	</html>
+ 
+ <?php include("includes/footer.php"); ?>
+ 
+ <?php if (!empty($message)) {echo "<p class=\"error\">" . "MESSAGE: ". $message . "</p>";} ?>

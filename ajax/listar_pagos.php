@@ -12,7 +12,7 @@ if($action == 'ajax'){
 	alumnos  on pagos.id_alumno = alumnos.id_alumno";
 	$campos="*";
 	$sWhere="alumnos.Apellido LIKE '%".$query."%'";
-	$sWhere.=" order by pagos.fecha";
+	$sWhere.=" order by pagos.id_pagos desc";
 	
 	
 	

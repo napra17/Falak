@@ -1,4 +1,10 @@
 <?php
+
+	session_start();
+	if(!isset($_SESSION["session_username"])) {
+	header("location:index.php");
+	} else {
+
 include ("menu.html");
 include ("conexion.php");
 $alumno = $_GET["id"];
@@ -94,3 +100,5 @@ echo "<input type='text' hidden='true' name='id_alumno' value=".$id.">";
 
 
 </html>
+
+<?php } ?>

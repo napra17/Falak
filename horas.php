@@ -1,3 +1,9 @@
+<?php 
+  session_start();
+  if(!isset($_SESSION["session_username"])) {
+  header("location:index.php");
+  } else { ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -147,3 +153,4 @@ where m.estado = 'Pendiente' and m.id_profesor = $id_profesor group by m.idmes;"
 </script>
 </html>
 
+<?php } ?>
