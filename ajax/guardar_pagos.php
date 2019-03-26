@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 	if (empty($_POST['alumno'])){
 		$errors[] = "Debe ingresar un Alumno.";
 	} elseif (!empty($_POST['alumno'])){
@@ -11,14 +13,23 @@
 	$periodo = intval($_POST["periodo"]);
 	$anio = intval($_POST["anio"]);
 	$fecha = date(Ymd);
+	$timestamp = date("Y-m-d H:i:s");  
+	$detalle = $alumno .';'. $tipo .';'. $precio.';'.$periodo.';'.$anio;
+	$usuario = $_SESSION['session_username'];
 	
 	
 
 	// REGISTER data into database
-    $sql = "INSERT INTO pagos(id_alumno, id_pago,importe, mes, anio, fecha) VALUES ('$alumno','$tipo','$precio','$periodo','$anio','$fecha')";
+    $sql = "INSERT INTO pagos(id_alumno, id_pago,importe, mes, anio, fecha) VALUES ('$alumno','$tipo','$precio','$periodo','$anio','$fecha');";
+
+    $sqla = "INSERT INTO auditoria (usuario, fecha, accion, detalle) VALUES ('$usuario', '$timestamp', 'Agregar Pago',
+	(select concat (Apellido,',',Nombre, ';' ,(select nombre from tipopago where id_tipo = '$tipo'),';',$precio,';',$periodo, ';', $anio) 
+	from alumnos where id_alumno = '$alumno'));";
+
     $query = mysqli_query($con,$sql);
     // if product has been added successfully
     if ($query) {
+    	$audit = mysqli_query($con, $sqla);
         $messages[] = "El Pago ha sido registrado con éxito.";
     } else {
         $errors[] = "Lo sentimos, el registro falló. Por favor, regrese y vuelva a intentarlo.";

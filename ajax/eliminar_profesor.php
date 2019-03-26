@@ -5,13 +5,17 @@
 	require_once ("../conexion.php");//Contiene funcion que conecta a la base de datos
 	// escaping, additionally removing everything that could be (html/javascript-) code
     $id_profesor=intval($_POST['delete_id']);
-	
+	$timestamp = date("Y-m-d H:i:s");  
+	$usuario = $_SESSION['session_username'];
 
 	// DELETE FROM  database
     $sql = "DELETE FROM  profesores WHERE id_profesor='$id_profesor'";
-    $query = mysqli_query($con,$sql);
+    $sqla = "INSERT INTO auditoria (usuario, fecha, accion, detalle) VALUES ('$usuario','$timestamp','Eliminar Profesor',(select concat (Apellido,',',Nombre) from profesores where id_profesor = '$id_profesor'))";
+
+    $query = mysqli_query($con,$sqla);
     // if product has been added successfully
     if ($query) {
+    	$audit = mysqli_query($con, $sql);
         $messages[] = "El profesor ha sido eliminado con éxito.";
     } else {
         $errors[] = "Lo sentimos, la eliminación falló. Por favor, regrese y vuelva a intentarlo.";

@@ -1,33 +1,22 @@
 <?php
-
-session_start();
-
-	if (empty($_POST['porc'])){
-		$errors[] = "Debe ingresar un Tipo.";
-	} elseif (!empty($_POST['porc'])){
+	if (empty($_POST['delete_id'])){
+		$errors[] = "Id vacío.";
+	} elseif (!empty($_POST['delete_id'])){
 	require_once ("../conexion.php");//Contiene funcion que conecta a la base de datos
 	// escaping, additionally removing everything that could be (html/javascript-) code
-    $tipo = mysqli_real_escape_string($con,(strip_tags($_POST["tipo"],ENT_QUOTES)));
-	$desc = mysqli_real_escape_string($con,(strip_tags($_POST["desc"],ENT_QUOTES)));
-	$porc = intval($_POST["porc"]);
-	$timestamp = date("Y-m-d H:i:s");  
-	$detalle = $desc .';'. $porc;
-	$usuario = $_SESSION['session_username'];
-
-	
+    
+    $usuario=mysqli_real_escape_string($con,(strip_tags($_POST["delete_id"],ENT_QUOTES)));
+    
 	
 
-	// REGISTER data into database
-    $sql = "INSERT INTO descuentos (tipo, descripcion, porcentaje) VALUES ('$tipo','$desc','$porc')";
-    $sqla = "INSERT INTO auditoria (usuario, fecha, accion, detalle) VALUES ('$usuario','$timestamp','Agregar Configuracion Pago','detalle')";
-
+	// DELETE FROM  database
+    $sql = "DELETE FROM  usuarios WHERE usuario='$usuario'";
     $query = mysqli_query($con,$sql);
     // if product has been added successfully
     if ($query) {
-    	$audit = mysqli_query($con, $sqla);
-        $messages[] = "El registro ha sido guardado con éxito.";
+        $messages[] = "El Usuario ha sido eliminado con éxito.";
     } else {
-        $errors[] = "Lo sentimos, el registro falló. Por favor, regrese y vuelva a intentarlo.";
+        $errors[] = "Lo sentimos, la eliminación falló. Por favor, regrese y vuelva a intentarlo.";
     }
 		
 	} else 

@@ -1,7 +1,13 @@
 <?php   session_start();
   if(!isset($_SESSION["session_username"])) {
   header("location:index.php");
-  } else { ?>
+  } else {
+    
+  if ($_SESSION['session_perfil'] == 'Administrador'){
+    $menu = 'menu.php';
+  }else{
+    $menu = 'menu_oper.php';
+  } ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +60,7 @@
         </div>
     </div>
   <!-- Menu Vertical HTML -->
-  <?php include("menu.html");?>
+  <?php include($menu);?>
   <!-- Edit Modal HTML -->
   <?php include("html/pago_hora_add.php");?>
   <!-- Edit Modal HTML -->

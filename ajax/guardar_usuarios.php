@@ -1,31 +1,22 @@
 <?php
-
-session_start();
-
-	if (empty($_POST['porc'])){
-		$errors[] = "Debe ingresar un Tipo.";
-	} elseif (!empty($_POST['porc'])){
+	if (empty($_POST['apellido'])){
+		$errors[] = "Debe ingresar un Apellido.";
+	} elseif (!empty($_POST['apellido'])){
 	require_once ("../conexion.php");//Contiene funcion que conecta a la base de datos
 	// escaping, additionally removing everything that could be (html/javascript-) code
-    $tipo = mysqli_real_escape_string($con,(strip_tags($_POST["tipo"],ENT_QUOTES)));
-	$desc = mysqli_real_escape_string($con,(strip_tags($_POST["desc"],ENT_QUOTES)));
-	$porc = intval($_POST["porc"]);
-	$timestamp = date("Y-m-d H:i:s");  
-	$detalle = $desc .';'. $porc;
-	$usuario = $_SESSION['session_username'];
-
-	
+    $apellido = mysqli_real_escape_string($con,(strip_tags($_POST["apellido"],ENT_QUOTES)));
+	$nombre = mysqli_real_escape_string($con,(strip_tags($_POST["name"],ENT_QUOTES)));
+	$perfil = mysqli_real_escape_string($con,(strip_tags($_POST["perfil"],ENT_QUOTES)));
+	$usuario = mysqli_real_escape_string($con,(strip_tags($_POST["usuario"],ENT_QUOTES)));
+	$password = mysqli_real_escape_string($con,(strip_tags($_POST["passwd"],ENT_QUOTES)));
 	
 
 	// REGISTER data into database
-    $sql = "INSERT INTO descuentos (tipo, descripcion, porcentaje) VALUES ('$tipo','$desc','$porc')";
-    $sqla = "INSERT INTO auditoria (usuario, fecha, accion, detalle) VALUES ('$usuario','$timestamp','Agregar Configuracion Pago','detalle')";
-
+    $sql = "INSERT INTO usuarios(usuario, Apellido, Nombre, perfil, password) VALUES ('$usuario','$apellido','$nombre','$perfil','$password')";
     $query = mysqli_query($con,$sql);
     // if product has been added successfully
     if ($query) {
-    	$audit = mysqli_query($con, $sqla);
-        $messages[] = "El registro ha sido guardado con éxito.";
+        $messages[] = "El Usuario ha sido guardado con éxito.";
     } else {
         $errors[] = "Lo sentimos, el registro falló. Por favor, regrese y vuelva a intentarlo.";
     }

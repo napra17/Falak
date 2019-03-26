@@ -4,14 +4,15 @@
 	if(!isset($_SESSION["session_username"])) {
 	header("location:index.php");
 	} else {
-		session_set_cookie_params(0, "/", $HTTP_SERVER_VARS["HTTP_HOST"], 0); 
-
-	if ($_SESSION['session_perfil'] = 'Administrador'){
-		include ("menu_oper.html");
+		
+	if ($_SESSION['session_perfil'] == 'Administrador'){
+		$menu = 'menu.php';
 	}else{
-		include ("menu.html");
-	}	
+		$menu = 'menu_oper.php';
+	}
 	
+	include ($menu);
+
 	date_default_timezone_set('America/Argentina/Buenos_Aires');
 	$mes =date(F);
 	$meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
@@ -35,6 +36,7 @@
 	</head>
 
 	<body>
+
 	<div id="general">
 	<div id="titulo">Pagos adeudados de <?php echo $nombreMes	 ?></div>
 	<div id="panel1"></div>

@@ -3,6 +3,13 @@
   if(!isset($_SESSION["session_username"])) {
   header("location:index.php");
   } else {
+    
+  if ($_SESSION['session_perfil'] == 'Administrador'){
+    $menu = 'menu.php';
+  }else{
+    $menu = 'menu_oper.php';
+  }
+
  ?>
 
 <!DOCTYPE html>
@@ -56,7 +63,7 @@
         </div>
     </div>
   <!-- Menu Vertical HTML -->
-  <?php include("menu.html");?>
+  <?php  include ($menu);?>
   <!-- Edit Modal HTML -->
   <?php include("html/modal_add.php");?>
   <!-- Edit Modal HTML -->

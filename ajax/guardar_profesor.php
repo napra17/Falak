@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 	if (empty($_POST['apellido'])){
 		$errors[] = "Debe ingresar un Apellido.";
 	} elseif (!empty($_POST['apellido'])){
@@ -7,12 +9,20 @@
     $apellido = mysqli_real_escape_string($con,(strip_tags($_POST["apellido"],ENT_QUOTES)));
 	$nombre = mysqli_real_escape_string($con,(strip_tags($_POST["name"],ENT_QUOTES)));
 	$dni = intval($_POST["dni"]);
+	$timestamp = date("Y-m-d H:i:s");  
+	$detalle = $apellido .';'. $nombre;
+	$usuario = $_SESSION['session_username'];
 
 	// REGISTER data into database
     $sql = "INSERT INTO profesores(Apellido, Nombre, DNI) VALUES ('$apellido','$nombre','$dni')";
+      $sqla = "INSERT INTO auditoria (usuario, fecha, accion, detalle) VALUES ('$usuario','$timestamp','Agregar Profesor','detalle')";
+
     $query = mysqli_query($con,$sql);
+
+
     // if product has been added successfully
     if ($query) {
+    	$audit = mysqli_query($con, $sqla);
         $messages[] = "El Profesor ha sido guardado con éxito.";
     } else {
         $errors[] = "Lo sentimos, el registro falló. Por favor, regrese y vuelva a intentarlo.";

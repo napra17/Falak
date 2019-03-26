@@ -1,9 +1,15 @@
 <?php 
-	session_start();
+session_start();
 	if(!isset($_SESSION["session_username"])) {
 	header("location:index.php");
 	} else {
-include ("menu.html");
+		
+	if ($_SESSION['session_perfil'] == 'Administrador'){
+		$menu = 'menu.php';
+	}else{
+		$menu = 'menu_oper.php';
+	}
+	include ($menu);
  ?>
 
  <!DOCTYPE html>

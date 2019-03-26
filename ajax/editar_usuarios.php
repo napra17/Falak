@@ -1,33 +1,24 @@
 <?php
-
-session_start();
-
-	if (empty($_POST['porc'])){
-		$errors[] = "Debe ingresar un Tipo.";
-	} elseif (!empty($_POST['porc'])){
+	if (empty($_POST['edit_id'])){
+		$errors[] = "ID está vacío.";
+	} elseif (!empty($_POST['edit_id'])){
 	require_once ("../conexion.php");//Contiene funcion que conecta a la base de datos
 	// escaping, additionally removing everything that could be (html/javascript-) code
-    $tipo = mysqli_real_escape_string($con,(strip_tags($_POST["tipo"],ENT_QUOTES)));
-	$desc = mysqli_real_escape_string($con,(strip_tags($_POST["desc"],ENT_QUOTES)));
-	$porc = intval($_POST["porc"]);
-	$timestamp = date("Y-m-d H:i:s");  
-	$detalle = $desc .';'. $porc;
-	$usuario = $_SESSION['session_username'];
-
+    $apellido = mysqli_real_escape_string($con,(strip_tags($_POST["edit_ape"],ENT_QUOTES)));
+	$nombre = mysqli_real_escape_string($con,(strip_tags($_POST["edit_name"],ENT_QUOTES)));
+	$dni = intval($_POST["edit_dni"]);
+	$telefono = intval($_POST["edit_tel"]);
+	$domicilio = mysqli_real_escape_string($con,(strip_tags($_POST["edit_domi"],ENT_QUOTES)));
 	
-	
-
-	// REGISTER data into database
-    $sql = "INSERT INTO descuentos (tipo, descripcion, porcentaje) VALUES ('$tipo','$desc','$porc')";
-    $sqla = "INSERT INTO auditoria (usuario, fecha, accion, detalle) VALUES ('$usuario','$timestamp','Agregar Configuracion Pago','detalle')";
-
+	$id=intval($_POST['edit_id']);
+	// UPDATE data into database
+    $sql = "UPDATE alumnos SET Apellido='".$apellido."', Nombre='".$nombre."', DNI='".$dni."', Domicilio='".$domicilio."',  Telefono='".$telefono."' WHERE id_alumno='".$id."' ";
     $query = mysqli_query($con,$sql);
     // if product has been added successfully
     if ($query) {
-    	$audit = mysqli_query($con, $sqla);
-        $messages[] = "El registro ha sido guardado con éxito.";
+        $messages[] = "El producto ha sido actualizado con éxito.";
     } else {
-        $errors[] = "Lo sentimos, el registro falló. Por favor, regrese y vuelva a intentarlo.";
+        $errors[] = "Lo sentimos, la actualización falló. Por favor, regrese y vuelva a intentarlo.";
     }
 		
 	} else 

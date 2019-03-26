@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 	
 	/* Connect To Database*/
 	require_once ("../conexion.php");
@@ -85,9 +87,16 @@ if($action == 'ajax'){
 							<td>
 								<a  target="_blank" rel="noopener noreferrer" href='./recibo.php?id=<?php echo $id_pagos; ?>'>
 								<i class="material-icons" title="recibo">print</i></a>
-								
+							<?php 
+							if ($_SESSION['session_perfil']== 'Administrador'){
+
+							
+
+							 ?>	
 								<a href="#deleteProductModal" class="delete" data-toggle="modal" data-id="<?php echo $id_pagos;?>"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
-                    		</td>                          
+							<?php }else { ?>
+                    		</td>
+                    		<?php } ?>                          
 						</tr>
 						<?php }?>
 						<tr>

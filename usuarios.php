@@ -1,4 +1,4 @@
-<?php   session_start();
+<?php session_start();
   if(!isset($_SESSION["session_username"])) {
   header("location:index.php");
   } else {
@@ -15,7 +15,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Administracion de Alumnos Falak </title>
+<title>Administracion de Falak </title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="bootstrap/css/material-icons.css">
 <link rel="stylesheet" href="bootstrap/css/fontawesome.min.css">
@@ -31,10 +31,10 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-            <h2>Administrar <b>Pagos</b></h2>
+            <h2>Administrar <b>Usuarios</b></h2>
           </div>
           <div class="col-sm-6">
-            <a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Ingresar pago</span></a>
+            <a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar nuevo usuario</span></a>
           </div>
                 </div>
             </div>
@@ -62,12 +62,12 @@
   <!-- Menu Vertical HTML -->
   <?php include($menu);?>
   <!-- Edit Modal HTML -->
-  <?php include("html/pago_add.php");?>
+  <?php include("html/usuario_modal_add.php");?>
   <!-- Edit Modal HTML -->
-  <?php include("html/pago_edit.php");?>
-  <?php include("html/pago_delete.php");?>
-
-  <script src="js/script_pago.js"></script>
+  <?php include("html/usuario_modal_edit.php");?>
+  <!-- Delete Modal HTML -->
+  <?php include("html/usuario_modal_delete.php");?>
+  <script src="js/script_usuarios.js"></script>
 </body>
 </html>
 <?php } ?>

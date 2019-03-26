@@ -1,12 +1,17 @@
 <?php
 
-	session_start();
+session_start();
 	if(!isset($_SESSION["session_username"])) {
 	header("location:index.php");
 	} else {
-
-include ("menu.html");
+		
+	if ($_SESSION['session_perfil'] == 'Administrador'){
+		include ("menu.php");
+	}else{
+		include ("menu_oper.php");
+	}
 include ("conexion.php");
+
 $alumno = $_GET["id"];
 
 

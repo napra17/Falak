@@ -1,8 +1,14 @@
 <?php 
-  session_start();
+session_start();
   if(!isset($_SESSION["session_username"])) {
   header("location:index.php");
-  } else { ?>
+  } else {
+    
+  if ($_SESSION['session_perfil'] == 'Administrador'){
+    $menu = 'menu.php';
+  }else{
+    $menu = 'menu_oper.php';
+  } ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +26,7 @@
 <link rel="stylesheet" href="css/custom.css">
 </head>
 <?php 
-include("menu.html");
+include($menu);
 require_once ("conexion.php");
 $id_profesor = $_GET["id"];
 

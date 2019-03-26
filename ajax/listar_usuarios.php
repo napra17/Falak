@@ -1,6 +1,4 @@
 <?php
-
-session_start();
 	
 	/* Connect To Database*/
 	require_once ("../conexion.php");
@@ -10,10 +8,10 @@ $action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['a
 if($action == 'ajax'){
 	$query = mysqli_real_escape_string($con,(strip_tags($_REQUEST['query'], ENT_QUOTES)));
 
-	$tables="profesores";
+	$tables="usuarios";
 	$campos="*";
-	$sWhere=" profesores.Apellido LIKE '%".$query."%'";
-	$sWhere.=" order by profesores.Apellido";
+	$sWhere=" usuarios.usuario LIKE '%".$query."%'";
+	$sWhere.=" order by usuarios.usuario";
 	
 	
 	include 'pagination.php'; //include pagination file
@@ -42,11 +40,12 @@ if($action == 'ajax'){
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
-						<th class='text-center'>ID</th>
-						<th class='text-center'>Apellido </th>
-						<th class='text-center'>Nombre </th>
-						<th class='text-center'>DNI</th>
-
+						
+						<th>Usuario</th>
+						<th>Nombre</th>
+						<th class='text-center'>Apellido</th>
+						<th class='text-center'>Perfil</th>
+					
 						<th></th>
 					</tr>
 				</thead>
@@ -54,26 +53,27 @@ if($action == 'ajax'){
 						<?php 
 						$finales=0;
 						while($row = mysqli_fetch_array($query)){	
-							$id_profesor=$row['id_profesor'];
+							$usuario=$row['usuario'];
 							$apellido=$row['Apellido'];
 							$nombre=$row['Nombre'];
-							$dni=$row['DNI'];
-						
+							$perfil=$row['perfil'];				
 							$finales++;
 						?>	
 						<tr class="<?php echo $text_class;?>">
-							<td class='text-center'><?php echo $id_profesor;?></td>
+							<td class='text-center'><?php echo $usuario;?></td>
 							<td class='text-center'><?php echo $apellido;?></td>
 							<td class='text-center'><?php echo $nombre;?></td>
-							<td class='text-center'><?php echo $dni;?></td>
-							<?php if($_SESSION['session_perfil']== 'Administrador'){ ?>
-							<td>
-								<a href='./horas.php?id=<?php echo $id_profesor; ?>'>
-								<i class="material-icons" title="Horas">alarm</i></a></td>
+							<td class='text-center'><?php echo $perfil;?></td>
 							
-							<?php }else{} ?>
-							<td>	<a href="#"  data-target="#editProductModal" class="edit" data-toggle="modal" data-ape='<?php echo $apellido;?>' data-name="<?php echo $nombre?>" data-dni="<?php echo $dni?>" data-id="<?php echo $id_profesor; ?>"><i class="material-icons" data-toggle="tooltip" title="Editar" >&#xE254;</i></a>
-								<a href="#deleteProductModal" class="delete" data-toggle="modal" data-id="<?php echo $id_profesor;?>"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+							<td>
+								<a href="#"  data-target="#editProductModal" class="edit" data-toggle="modal" data-ape='<?php echo $apellido;?>' 
+								data-name="<?php echo $nombre?>" 
+								data-perfil="<?php echo $perfil?>" 
+								
+								data-id="<?php echo $usuario; ?>">
+								
+								<a href="#deleteProductModal" class="delete" data-toggle="modal" data-id="<?php echo $usuario;?>"><i class="material-icons" data-toggle="tooltip" title="Eliminar">&#xE872;</i></a>
+
                     		</td>
 						</tr>
 						<?php }?>

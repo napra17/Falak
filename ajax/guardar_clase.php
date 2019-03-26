@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 	if (empty($_POST['name'])){
 		$errors[] = "Debe ingresar un Nombre.";
 	} elseif (!empty($_POST['name'])){
@@ -8,14 +11,20 @@
 	$nombre = mysqli_real_escape_string($con,(strip_tags($_POST["name"],ENT_QUOTES)));
 	$horario = mysqli_real_escape_string($con,(strip_tags($_POST["horario"],ENT_QUOTES)));
 	$profesor = mysqli_real_escape_string($con,(strip_tags($_POST["profesor"],ENT_QUOTES)));
-	
+	$timestamp = date("Y-m-d H:i:s"); 
 	$mensualidad = intval($_POST["precio"]);
+	$detalle = $nombre. ';' . $profesor;
+	$usuario = $_SESSION['session_username'];
 
 	// REGISTER data into database
     $sql = "INSERT INTO clases (Nombre, Dias, Horario, Profesor) VALUES ('$nombre','$dias','$horario', '$profesor')";
+    $sqla = "INSERT INTO auditoria (usuario, fecha, accion, detalle) VALUES ('$usuario','$timestamp','Agregar Clase','$detalle');";
+
     $query = mysqli_query($con,$sql);
+
     // if product has been added successfully
     if ($query) {
+    	$audit = mysqli_query($con, $sqla);
         $messages[] = "La clase ha sido guardado con éxito.";
     } else {
         $errors[] = "Lo sentimos, el registro falló. Por favor, regrese y vuelva a intentarlo.";
